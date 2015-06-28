@@ -4,7 +4,11 @@ RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y curl
 RUN curl -sL https://deb.nodesource.com/setup | sudo bash -
 RUN apt-get install -y nodejs
-RUN npm install -g nodemon
-EXPOSE 8080
+RUN npm install -g supervisor
 
-CMD ["nodemon", "--watch", "/src/", "/src/index.js"]
+EXPOSE 8080
+EXPOSE 35729
+
+ADD startup.sh /usr/local/bin/startup.sh
+RUN chmod +x /usr/local/bin/startup.sh
+CMD ["/usr/local/bin/startup.sh"]
