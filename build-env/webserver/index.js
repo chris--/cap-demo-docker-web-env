@@ -1,15 +1,15 @@
 var express = require('express')
-  , path = require('path')
   , livereload = require('livereload');
 
 var publicDir = process.env.publicDir || '/mount/app/public/';
-
 var app = express();
 
-// configure application routes
-/*app.get('/', function(req, res) {
-  res.sendFile(path.join(publicDir, 'index.html'))
-});*/
+// hello-world REST route
+app.get('/rest/hello', function(req, res) {
+  res.json({ message: 'Hello World!'});
+});
+
+// serve static files from public dir
 app.use(express.static(publicDir));
 
 // start webserver
