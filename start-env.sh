@@ -7,10 +7,11 @@ livereload_port=35729
 running_instances=($(docker ps | grep "chris/ubuntu-node" | awk '{ print $1 }'))
 for i in "${running_instances[@]}"
 do
-	echo -n "Stopped instance: "
-	docker stop $i
+	echo -n "Stopping instance $i..."
+	OLDID=$(docker stop $i)
+	echo " done"
 done
 
-echo -n "Starting instance: "
-docker run -d -p ${local_port}:8080 -p ${livereload_port}:35729 -v `pwd`/:/mount/app ${docker_image}
-echo "on $(boot2docker ip):${local_port}"
+NEWID=$(docker run -d -p ${local_port}:8080 -p ${livereload_port}:35729 -v $(pwd)/:/mount/app ${docker_image})
+echo -n "Started instance: $(echo ${NEWID} | cut -c 1-12)"
+echo " on $(boot2docker ip):${local_port}"
