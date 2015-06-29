@@ -1,12 +1,12 @@
 var express = require('express')
   , livereload = require('livereload');
 
-var publicDir = process.env.publicDir || '/mount/app/public/';
+var publicDir = process.env.publicDir || '/mount/app/public';
 var app = express();
 
 // hello-world REST route
 app.get('/rest/hello', function(req, res) {
-  res.json({ message: 'Hello World!'});
+  res.json({ message: 'Hello World!!'});
 });
 
 // serve static files from public dir
@@ -21,4 +21,4 @@ var server = app.listen(process.env.port || 8080, function() {
 
 // start livereload server to watch for file changes in serving dir
 var lrServer = livereload.createServer();
-lrServer.watch(publicDir);
+lrServer.watch([publicDir, publicDir + '/js', publicDir + '/css']);
