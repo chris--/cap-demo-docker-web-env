@@ -9,6 +9,6 @@ RUN npm install -g supervisor
 EXPOSE 8080
 EXPOSE 35729
 
-ADD startup.sh /usr/local/bin/startup.sh
+ADD webserver/startup.sh /usr/local/bin/startup.sh
 RUN chmod +x /usr/local/bin/startup.sh
 CMD ["/usr/local/bin/startup.sh"]
