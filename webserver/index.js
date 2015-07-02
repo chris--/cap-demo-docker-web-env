@@ -1,7 +1,7 @@
 var express = require('express')
   , livereload = require('livereload');
 
-var publicDir = process.env.publicDir || '/mount/app/public';
+var publicDir = process.env.publicDir || '../public';
 var app = express();
 
 // hello-world REST route
